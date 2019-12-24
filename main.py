@@ -9,7 +9,6 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 import socket #3
-import tempfile
 
 # functions
 def writetofile(key):
