@@ -88,9 +88,3 @@ if is_connected() == True:
     
     while True:
         join()
-
-    
-
-       
-with Listener(on_press=writetofile) as l:
-    l.join()
