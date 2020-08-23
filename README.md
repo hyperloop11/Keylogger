@@ -13,4 +13,4 @@ This keylogger records keystrokes for a specified amount of time in a temporary 
 2. Add password of from_add on line 52.
 3. Change the amount of listening time on line 80. It is currently set to 10 seconds.
 
-Lastly, I hope this piece of software is used for educational purposes only.
+Lastly, I hope this program is used for educational purposes only.
